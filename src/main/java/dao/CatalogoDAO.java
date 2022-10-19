@@ -4,8 +4,8 @@
  */
 package dao;
 
-import Model.Carro;
-import Model.Catalogo;
+import model.Carro;
+import model.Catalogo;
 import java.util.ArrayList;
 import java.util.List;
 

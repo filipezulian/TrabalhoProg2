@@ -1,5 +1,5 @@
 
-package Model;
+package model;
 
 import dao.ClienteDAO;
 import exceptions.CNHRegistroException;

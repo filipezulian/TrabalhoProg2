@@ -1,7 +1,7 @@
 
 package dao;
 
-import Model.Cliente;
+import model.Cliente;
 import java.util.ArrayList;
 import java.util.List;
 

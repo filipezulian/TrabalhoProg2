@@ -4,16 +4,16 @@
  */
 package TelaHome;
 
-import Model.Catalogo;
-import TelasAluguel.AlugarView;
-import TelasAluguel.DevolucaoView;
-import TelasCatalogo.AdicionarVeiculoView;
-import TelasCatalogo.ApagarVeiculoView;
-import TelasCatalogo.EditarVeiculoView;
-import TelasCatalogo.PesquisarVeiculoView;
-import TelasCliente.AdicionarClienteView;
-import TelasCliente.ApagarClienteView;
-import TelasCliente.EditarClienteView;
+import model.Catalogo;
+import view.TelasAluguel.AlugarView;
+import view.TelasAluguel.DevolucaoView;
+import view.TelasCatalogo.AdicionarVeiculoView;
+import view.TelasCatalogo.ApagarVeiculoView;
+import view.TelasCatalogo.EditarVeiculoView;
+import view.TelasCatalogo.PesquisarVeiculoView;
+import view.TelasCliente.AdicionarClienteView;
+import view.TelasCliente.ApagarClienteView;
+import view.TelasCliente.EditarClienteView;
 import dao.CatalogoDAO;
 
 /**

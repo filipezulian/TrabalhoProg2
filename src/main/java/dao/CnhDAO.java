@@ -1,7 +1,7 @@
 
 package dao;
 
-import Model.Cnh;
+import model.Cnh;
 import java.util.ArrayList;
 import java.util.List;
 

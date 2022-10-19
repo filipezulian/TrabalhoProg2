@@ -1,7 +1,7 @@
 
 package dao;
 
-import Model.Aluguel;
+import model.Aluguel;
 import java.util.ArrayList;
 import java.util.List;
 
