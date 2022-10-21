@@ -5,9 +5,10 @@
 package view.TelasCatalogo;
 
 import model.Catalogo;
-import model.Veiculo;
 import dao.CatalogoDAO;
 import java.util.List;
+import model.Multa;
+import model.Veiculo;
 
 /**
  *

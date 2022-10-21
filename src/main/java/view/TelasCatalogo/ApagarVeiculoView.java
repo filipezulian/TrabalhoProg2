@@ -7,9 +7,10 @@ package view.TelasCatalogo;
 import model.Carro;
 import model.Catalogo;
 import model.Van;
-import model.Veiculo;
 import dao.CatalogoDAO;
 import javax.swing.JOptionPane;
+import model.Multa;
+import model.Veiculo;
 
 /**
  *
@@ -114,33 +115,25 @@ public class ApagarVeiculoView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnApagarVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApagarVeiculoActionPerformed
-        Veiculo veic = (Veiculo)cbApagar.getSelectedItem();
-        
-        if(veic == null){
-        JOptionPane.showMessageDialog(null, "Não ha nada para remover.");
-        }else if(veic instanceof Carro c) {
-            for(Catalogo cat : CatalogoDAO.recuperarTodosCatalogos()) {
-                if(cat.getTipo().equalsIgnoreCase("carro")) {
-                    cat.removerVeiculo(c);
-                    JOptionPane.showMessageDialog(null, "Veículo removido com sucesso!");
-                }
-            }
-        }else if(veic instanceof Van van) {
-            for(Catalogo cat : CatalogoDAO.recuperarTodosCatalogos()) {
-                if(cat.getTipo().equalsIgnoreCase("van")) {
-                    cat.removerVeiculo(van);
-                    JOptionPane.showMessageDialog(null, "Veículo removido com sucesso!");
-                }
+        Veiculo veic = (Veiculo) cbApagar.getSelectedItem();
+
+        if (veic == null) {
+            JOptionPane.showMessageDialog(null, "Não ha nada para remover.");
+        } else {
+            for (Catalogo cat : CatalogoDAO.recuperarTodosCatalogos()) {
+                cat.removerVeiculo(veic);
+                JOptionPane.showMessageDialog(null, "Veículo removido com sucesso!");
+
             }
         }
         cbApagar.removeAllItems();
         popularComboBox();
-        
+
     }//GEN-LAST:event_btnApagarVeiculoActionPerformed
 
-    private void popularComboBox(){
-        for(Catalogo cat : CatalogoDAO.recuperarTodosCatalogos()){
-            for(Veiculo v : cat.getVeiculos()){
+    private void popularComboBox() {
+        for (Catalogo cat : CatalogoDAO.recuperarTodosCatalogos()) {
+            for (Veiculo v : cat.getVeiculos()) {
                 cbApagar.addItem(v);
             }
         }

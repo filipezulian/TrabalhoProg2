@@ -18,6 +18,7 @@ C:\Users\Filipe Zulian\Desktop\pastinha faculdade projetos\TrabalhoProg2_Atualiz
 C:\Users\Filipe Zulian\Desktop\pastinha faculdade projetos\TrabalhoProg2_AtualizadoTelas\src\main\java\dao\AluguelDAO.java
 C:\Users\Filipe Zulian\Desktop\pastinha faculdade projetos\TrabalhoProg2_AtualizadoTelas\src\main\java\model\Carro.java
 C:\Users\Filipe Zulian\Desktop\pastinha faculdade projetos\TrabalhoProg2_AtualizadoTelas\src\main\java\model\Cliente.java
+C:\Users\Filipe Zulian\Desktop\pastinha faculdade projetos\TrabalhoProg2_AtualizadoTelas\src\main\java\exceptions\AlugadoException.java
 C:\Users\Filipe Zulian\Desktop\pastinha faculdade projetos\TrabalhoProg2_AtualizadoTelas\src\main\java\model\Catalogo.java
 C:\Users\Filipe Zulian\Desktop\pastinha faculdade projetos\TrabalhoProg2_AtualizadoTelas\src\main\java\model\Cnh.java
 C:\Users\Filipe Zulian\Desktop\pastinha faculdade projetos\TrabalhoProg2_AtualizadoTelas\src\main\java\view\TelasCliente\AdicionarClienteView.java
@@ -25,4 +26,5 @@ C:\Users\Filipe Zulian\Desktop\pastinha faculdade projetos\TrabalhoProg2_Atualiz
 C:\Users\Filipe Zulian\Desktop\pastinha faculdade projetos\TrabalhoProg2_AtualizadoTelas\src\main\java\view\TelasCliente\EditarClienteView.java
 C:\Users\Filipe Zulian\Desktop\pastinha faculdade projetos\TrabalhoProg2_AtualizadoTelas\src\main\java\model\Van.java
 C:\Users\Filipe Zulian\Desktop\pastinha faculdade projetos\TrabalhoProg2_AtualizadoTelas\src\main\java\view\TelasCatalogo\ApagarVeiculoView.java
+C:\Users\Filipe Zulian\Desktop\pastinha faculdade projetos\TrabalhoProg2_AtualizadoTelas\src\main\java\model\Multa.java
 C:\Users\Filipe Zulian\Desktop\pastinha faculdade projetos\TrabalhoProg2_AtualizadoTelas\src\main\java\model\Aluguel.java

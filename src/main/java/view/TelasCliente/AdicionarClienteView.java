@@ -49,6 +49,8 @@ public class AdicionarClienteView extends javax.swing.JFrame {
         tfCPF = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         btnAdicionar = new javax.swing.JToggleButton();
+        tfIdade = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -60,47 +62,17 @@ public class AdicionarClienteView extends javax.swing.JFrame {
         jLabel1.setText("Adicionar Cliente");
         jLabel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        tfNome.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfNomeActionPerformed(evt);
-            }
-        });
-
         jLabel2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel2.setText("Nome:");
-
-        tfTelefone.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfTelefoneActionPerformed(evt);
-            }
-        });
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel3.setText("Telefone:");
 
-        tfRegistroCNH.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfRegistroCNHActionPerformed(evt);
-            }
-        });
-
         jLabel4.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel4.setText("Registro CNH:");
 
-        tfExpCNH.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfExpCNHActionPerformed(evt);
-            }
-        });
-
         jLabel5.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel5.setText("Ano Expiração CNH:");
-
-        tfCPF.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfCPFActionPerformed(evt);
-            }
-        });
 
         jLabel6.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel6.setText("CPF:");
@@ -112,6 +84,9 @@ public class AdicionarClienteView extends javax.swing.JFrame {
                 btnAdicionarActionPerformed(evt);
             }
         });
+
+        jLabel7.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel7.setText("Idade:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -142,7 +117,9 @@ public class AdicionarClienteView extends javax.swing.JFrame {
                                     .addComponent(jLabel3)
                                     .addComponent(tfExpCNH, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel5)
-                                    .addComponent(tfTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(tfTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tfIdade, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel7)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(btnAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -174,9 +151,15 @@ public class AdicionarClienteView extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(tfExpCNH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tfCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tfCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tfIdade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(35, 35, 35)
                 .addComponent(btnAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(23, Short.MAX_VALUE))
@@ -196,35 +179,16 @@ public class AdicionarClienteView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tfNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfNomeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfNomeActionPerformed
-
-    private void tfTelefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfTelefoneActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfTelefoneActionPerformed
-
-    private void tfRegistroCNHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfRegistroCNHActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfRegistroCNHActionPerformed
-
-    private void tfExpCNHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfExpCNHActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfExpCNHActionPerformed
-
-    private void tfCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfCPFActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfCPFActionPerformed
-
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
     String nome = tfNome.getText();
     String telefone = tfTelefone.getText();
     String cpf = tfCPF.getText();
     String registro = tfRegistroCNH.getText();
+    int idade = Integer.parseInt(tfIdade.getText());
     int anoExp = Integer.parseInt(tfExpCNH.getText());
     
     try{
-        Cliente cliente = criarCliente (nome, telefone, cpf);
+        Cliente cliente = criarCliente (nome, telefone, cpf, idade);
         
         Cnh cnh = criarCnh(registro, anoExp);
         
@@ -242,8 +206,8 @@ public class AdicionarClienteView extends javax.swing.JFrame {
     }
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
-    private Cliente criarCliente(String nome, String telefone, String cpf) throws CPFException {
-        Cliente c = new Cliente(nome, telefone, cpf);
+    private Cliente criarCliente(String nome, String telefone, String cpf, int idade) throws CPFException {
+        Cliente c = new Cliente(nome, telefone, cpf, idade);
         
         return c;
     }
@@ -263,9 +227,11 @@ public class AdicionarClienteView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField tfCPF;
     private javax.swing.JTextField tfExpCNH;
+    private javax.swing.JTextField tfIdade;
     private javax.swing.JTextField tfNome;
     private javax.swing.JTextField tfRegistroCNH;
     private javax.swing.JTextField tfTelefone;

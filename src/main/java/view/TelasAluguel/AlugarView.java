@@ -4,6 +4,21 @@
  */
 package view.TelasAluguel;
 
+import dao.AluguelDAO;
+import dao.CatalogoDAO;
+import dao.ClienteDAO;
+import exceptions.AlugadoException;
+import java.util.Collections;
+import java.util.List;
+import javax.swing.JOptionPane;
+import model.Aluguel;
+import model.Catalogo;
+import model.Cliente;
+import model.modelAluguel.Diario;
+import model.modelAluguel.Mensal;
+import model.modelAluguel.Semanal;
+import model.Veiculo;
+
 /**
  *
  * @author Filipe Zulian
@@ -15,6 +30,8 @@ public class AlugarView extends javax.swing.JFrame {
      */
     public AlugarView() {
         initComponents();
+
+        popularComboBox();
     }
 
     /**
@@ -28,10 +45,8 @@ public class AlugarView extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        cbCatalogo = new javax.swing.JComboBox<>();
+        cbVeiculo = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
-        tfPlaca = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
         cbCliente = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         cbTipoAluguel = new javax.swing.JComboBox<>();
@@ -41,7 +56,6 @@ public class AlugarView extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -51,13 +65,12 @@ public class AlugarView extends javax.swing.JFrame {
         jLabel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel2.setText("Catálogo:");
-
-        jLabel3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel3.setText("Placa:");
+        jLabel2.setText("Veículo:");
 
         jLabel4.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel4.setText("Cliente:");
+
+        cbTipoAluguel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Diário", "Semanal", "Mensal" }));
 
         jLabel5.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel5.setText("Tipo Aluguel:");
@@ -67,6 +80,11 @@ public class AlugarView extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jButton1.setText("Alugar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -84,21 +102,21 @@ public class AlugarView extends javax.swing.JFrame {
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(cbCatalogo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cbVeiculo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel2)
                                     .addComponent(cbCliente, 0, 180, Short.MAX_VALUE)
                                     .addComponent(jLabel4)
                                     .addComponent(tfTempo))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 153, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 144, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tfPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel3)
-                                    .addComponent(cbTipoAluguel, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel5)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(32, 32, 32)
-                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(16, 16, 16)))))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(40, 40, 40))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(cbTipoAluguel, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel5))
+                                        .addGap(25, 25, 25)))))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -109,21 +127,15 @@ public class AlugarView extends javax.swing.JFrame {
                 .addGap(40, 40, 40)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel3))
+                    .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbCatalogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbVeiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbTipoAluguel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(40, 40, 40)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbTipoAluguel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cbCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -147,21 +159,76 @@ public class AlugarView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Veiculo veic = (Veiculo) cbVeiculo.getSelectedItem();
+        Cliente c = (Cliente) cbCliente.getSelectedItem();
+        String tipoAluguel = (String) cbTipoAluguel.getSelectedItem();
+        int tempoAluguel = Integer.parseInt(tfTempo.getText());
+
+        Aluguel alug;
+
+        try {
+            verificarSeAlugado(veic);
+            if (tipoAluguel.equalsIgnoreCase("diário")) {
+                alug = new Diario();
+            } else if (tipoAluguel.equalsIgnoreCase("semanal")) {
+                alug = new Semanal();
+            } else {
+                alug = new Mensal();
+            }
+
+            alug.setVeiculo(veic);
+            alug.setCliente(c);
+            alug.setFinalizado(false);
+            veic.setAlugado(true); 
+            
+            alug.calcularValorAluguel(tempoAluguel);      
+            
+            System.out.println(alug.getPreco());
+            
+            AluguelDAO.salvarAluguel(alug);
+            
+            JOptionPane.showMessageDialog(null, "Cliente " + c.getNome() + " alugou o veículo " + veic.getModelo() + " com sucesso.");
+            
+        } catch (AlugadoException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void verificarSeAlugado(Veiculo veic) throws AlugadoException {
+        if (veic.isAlugado()) {
+            throw new AlugadoException();
+        }
+    }
+
+    private void popularComboBox() {
+        for (Catalogo cat : CatalogoDAO.recuperarTodosCatalogos()) {
+            List<Veiculo> veiculosOrdenados = cat.ordenarCatalogoCarros();
+            for (Veiculo v : veiculosOrdenados) {
+                cbVeiculo.addItem(v);
+            }
+        }
+        
+        Collections.sort(ClienteDAO.recuperarTodosClientes());
+
+        for (Cliente c : ClienteDAO.recuperarTodosClientes()) {
+            cbCliente.addItem(c);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> cbCatalogo;
-    private javax.swing.JComboBox<String> cbCliente;
+    private javax.swing.JComboBox<Cliente> cbCliente;
     private javax.swing.JComboBox<String> cbTipoAluguel;
+    private javax.swing.JComboBox<Veiculo> cbVeiculo;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField tfPlaca;
     private javax.swing.JTextField tfTempo;
     // End of variables declaration//GEN-END:variables
 }

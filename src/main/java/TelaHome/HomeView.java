@@ -9,12 +9,12 @@ import view.TelasAluguel.AlugarView;
 import view.TelasAluguel.DevolucaoView;
 import view.TelasCatalogo.AdicionarVeiculoView;
 import view.TelasCatalogo.ApagarVeiculoView;
-import view.TelasCatalogo.EditarVeiculoView;
-import view.TelasCatalogo.PesquisarVeiculoView;
 import view.TelasCliente.AdicionarClienteView;
 import view.TelasCliente.ApagarClienteView;
 import view.TelasCliente.EditarClienteView;
 import dao.CatalogoDAO;
+import view.TelasCatalogo.EditarVeiculoView;
+import view.TelasCatalogo.PesquisarVeiculoView;
 
 /**
  *
@@ -218,7 +218,7 @@ public class HomeView extends javax.swing.JFrame {
     }//GEN-LAST:event_miPesquisarActionPerformed
 
     private void miEditarVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miEditarVeiculoActionPerformed
-      EditarVeiculoView ev = new EditarVeiculoView();
+        EditarVeiculoView ev = new EditarVeiculoView();
       
       ev.setVisible(true);
     }//GEN-LAST:event_miEditarVeiculoActionPerformed

@@ -1,22 +1,34 @@
-package model;
+    package model;
 
 import dao.ClienteDAO;
 import exceptions.CPFException;
+import exceptions.CampoVazioException;
 
 
 
-public class Cliente {
+public class Cliente implements Comparable<Cliente> {
    private String nome;
    private String telefone;
    private String cpf;
+   private int idade;
    private int id;
    private Cnh cnh;
 
-    public Cliente(String nome, String telefone, String cpf) throws CPFException{
+    public Cliente(String nome, String telefone, String cpf, int idade) throws CPFException{
         this.nome = nome;
         this.telefone = telefone;
+        this.idade = idade;
         setCpf(cpf);
     }
+
+    public int getIdade() {
+        return idade;
+    }
+
+    public void setIdade(int idade) {
+        this.idade = idade;
+    }
+      
 
     public String getNome() {
         return nome;
@@ -60,7 +72,19 @@ public class Cliente {
 
     @Override
     public String toString() {
-        return "Cliente{" + "nome=" + nome + ", telefone=" + telefone + ", cpf=" + cpf + ", cnh=" + cnh + '}';
+        return  nome  + idade;
+    }
+
+    
+    @Override
+    public int compareTo(Cliente cliente) {
+        if(this.idade < cliente.getIdade()) {
+            return -1;
+        } else if(this.idade > cliente.getIdade()) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
     
     

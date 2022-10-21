@@ -7,9 +7,10 @@ package view.TelasCatalogo;
 import model.Carro;
 import model.Catalogo;
 import model.Van;
-import model.Veiculo;
 import dao.CatalogoDAO;
 import javax.swing.JOptionPane;
+import model.Multa;
+import model.Veiculo;
 
 /**
  *
@@ -142,58 +143,36 @@ public class EditarVeiculoView extends javax.swing.JFrame {
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         Veiculo v = (Veiculo) cbVeiculos.getSelectedItem();
-        
-        if (v instanceof Carro c) {
-            float precoDia = c.getPrecoDia();
-            int km = c.getKm(); 
-            atualizarVeiculo(v, precoDia, km);
-        } else if(v instanceof Van van) {
-            float precoDia = van.getPrecoDia();
-            int km = van.getKm(); 
-            atualizarVeiculo(v, precoDia, km);
-        }
-        
+
+        float precoDia = v.getPrecoDia();
+        int km = v.getKm();
+        atualizarVeiculo(v, precoDia, km);
+
         JOptionPane.showMessageDialog(null, "Veículo atualizado com sucesso!");
-        
+
         cbVeiculos.removeAllItems();
         popularComboBox();
-        
+
         limparTela();
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void atualizarVeiculo(Veiculo v, float precoDia, int km) {
-        if(v instanceof Carro c) {
-            if(!tfPreco.getText().isBlank()) {
-                c.setPrecoDia(Float.parseFloat(tfPreco.getText()));
+            if (!tfPreco.getText().isBlank()) {
+                v.setPrecoDia(Float.parseFloat(tfPreco.getText()));
             } else {
-                c.setPrecoDia(precoDia);
+                v.setPrecoDia(precoDia);
             }
-            
-            if(!tfKmCarro.getText().isBlank()) {
-                c.setKm(Integer.parseInt(tfKmCarro.getText()));
+
+            if (!tfKmCarro.getText().isBlank()) {
+                v.setKm(Integer.parseInt(tfKmCarro.getText()));
             } else {
-                c.setKm(km);
-            }
-        }
-        
-        if(v instanceof Van van) {
-            if(!tfPreco.getText().isBlank()) {
-                van.setPrecoDia(Float.parseFloat(tfPreco.getText()));
-            } else {
-                van.setPrecoDia(precoDia);
-            }
-            
-            if(!tfKmCarro.getText().isBlank()) {
-                van.setKm(Integer.parseInt(tfKmCarro.getText()));
-            } else {
-                van.setKm(km);
-            }
-        }
+                v.setKm(km);
+            }    
     }
-    
+
     private void popularComboBox() {
-        for(Catalogo c : CatalogoDAO.recuperarTodosCatalogos()) {
-            for(Veiculo v : c.getVeiculos()) {
+        for (Catalogo c : CatalogoDAO.recuperarTodosCatalogos()) {
+            for (Veiculo v : c.getVeiculos()) {
                 cbVeiculos.addItem(v);
             }
         }
@@ -203,7 +182,7 @@ public class EditarVeiculoView extends javax.swing.JFrame {
         tfPreco.setText("");
         tfKmCarro.setText("");
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JComboBox<Veiculo> cbVeiculos;

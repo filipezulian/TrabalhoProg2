@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -27,13 +28,7 @@ public class Catalogo {
     }
     
     public void addVeiculoMap(Veiculo v) {
-        if(v instanceof Carro c) {
-            mapVeiculos.put(c.getPlaca(), c);
-        }
-        
-        if(v instanceof Van van) {
-            mapVeiculos.put(van.getPlaca(), van);
-        }
+        mapVeiculos.put(v.getPlaca(), v);
     }
     
     public Veiculo buscarVeiculosCatalogo(String placa) {      
@@ -67,6 +62,22 @@ public class Catalogo {
     }
 
    
-    
+    public List<Veiculo> ordenarCatalogoCarros() {
+        List<Veiculo> listaVeiculos = new ArrayList<>();
+        
+        for(Veiculo v : this.veiculos) {
+            listaVeiculos.add(v);
+        }
+        
+        listaVeiculos.sort(new Comparator<Veiculo>() {
+            @Override
+            public int compare(Veiculo o1, Veiculo o2) {
+                return o1.getMarca().compareTo(o2.getMarca());
+            }
+        });
+        
+        
+        return listaVeiculos;
+    }
     
 }

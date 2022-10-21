@@ -3,15 +3,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package view.TelasCatalogo;
+
 import model.Carro;
 import dao.CatalogoDAO;
 import model.Catalogo;
 import model.Van;
-import model.Veiculo;
 import exceptions.PlacaExistenteException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import model.Veiculo;
 
 /**
  *
@@ -178,34 +177,48 @@ public class AdicionarVeiculoView extends javax.swing.JFrame {
         String placa = tfPlaca.getText();
         String modelo = tfModelo.getText();
         String marca = tfMarca.getText();
+        boolean alugado = false;
         float precoDia = Float.parseFloat(tfPreco.getText());
         int km = Integer.parseInt(tfKmCarro.getText());
-        
+
         try {
-            Veiculo veiculo = criarVeiculo(c, placa, modelo, marca, precoDia, km);
-        
+            Veiculo veiculo = criarVeiculo(c, placa, modelo, marca, precoDia, alugado, km);
+
             c.addVeiculo(veiculo);
-            c.addVeiculoMap(veiculo);
-            
+
+
+
             JOptionPane.showMessageDialog(null, "Veiculo adicionado com sucesso!");
+
+            if (veiculo.getID() == 1) {
+                c.addVeiculoMap(veiculo);
+            } else {
+                for (Veiculo v : c.getVeiculos()) {
+                    if (v.equals(veiculo)) {
+                        return;
+                    }
+                }
+                
+                c.addVeiculoMap(veiculo);
+            }       
             
-       } catch (PlacaExistenteException ex) {
+        } catch (PlacaExistenteException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
-       }
+        }
     }//GEN-LAST:event_btnAddActionPerformed
 
-    private Veiculo criarVeiculo(Catalogo c, String placa, String modelo, String marca, float precoDia, int km) throws PlacaExistenteException {
-        if(c.getTipo().equalsIgnoreCase("carro")) {
-            Veiculo v = new Carro(placa, marca, modelo, km, precoDia);
+    private Veiculo criarVeiculo(Catalogo c, String placa, String modelo, String marca, float precoDia, boolean alugado, int km) throws PlacaExistenteException {
+        if (c.getTipo().equalsIgnoreCase("carro")) {
+            Veiculo v = new Carro(placa, marca, modelo, km, alugado, precoDia);
             return v;
         } else {
-            Veiculo v = new Van(placa, marca, modelo, km, precoDia);
+            Veiculo v = new Van(placa, marca, modelo, km, alugado, precoDia);
             return v;
         }
     }
-    
+
     private void popularComboBox() {
-        for(Catalogo cat : CatalogoDAO.recuperarTodosCatalogos()) {
+        for (Catalogo cat : CatalogoDAO.recuperarTodosCatalogos()) {
             cbTipo.addItem(cat);
         }
     }

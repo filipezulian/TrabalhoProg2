@@ -4,7 +4,13 @@
  */
 package view.TelasAluguel;
 
+import dao.AluguelDAO;
+import dao.CatalogoDAO;
+import dao.ClienteDAO;
+import model.Aluguel;
+import model.Catalogo;
 import model.Cliente;
+import model.Veiculo;
 
 /**
  *
@@ -17,6 +23,7 @@ public class DevolucaoView extends javax.swing.JFrame {
      */
     public DevolucaoView() {
         initComponents();
+        popularComboBox();
     }
 
     /**
@@ -40,7 +47,6 @@ public class DevolucaoView extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -57,6 +63,11 @@ public class DevolucaoView extends javax.swing.JFrame {
 
         btnDevolver.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnDevolver.setText("Devolver");
+        btnDevolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDevolverActionPerformed(evt);
+            }
+        });
 
         taTotalPagar.setColumns(20);
         taTotalPagar.setRows(5);
@@ -132,6 +143,33 @@ public class DevolucaoView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnDevolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDevolverActionPerformed
+        Cliente c = (Cliente) cbCliente.getSelectedItem();      
+        int diasAtrasado = Integer.parseInt(tfAtrasado.getText());
+        
+        for(Catalogo cat : CatalogoDAO.recuperarTodosCatalogos()) {
+            for(Veiculo veic : cat.getVeiculos()) {
+                for(Aluguel alug : AluguelDAO.recuperarTodosAlugueis()) {
+                    if(alug.getCliente().getCpf().equals(c.getCpf())) {
+                        veic.setAlugado(false);
+                        alug.setFinalizado(true);
+                        taTotalPagar.append("O cliente " + c.getNome() + " deve pagar R$" + (veic.calcularMultaVeiculo(diasAtrasado) + alug.getPreco()));
+                        return;
+                    }
+                }
+            }
+        }
+        
+        taTotalPagar.append("O cliente " + c.getNome() + " não tem veículos para devolver");
+        
+    }//GEN-LAST:event_btnDevolverActionPerformed
+
+    
+    private void popularComboBox() {
+        for(Cliente c : ClienteDAO.recuperarTodosClientes()) {
+            cbCliente.addItem(c);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDevolver;
