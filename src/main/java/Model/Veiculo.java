@@ -116,7 +116,7 @@ public abstract class Veiculo implements Multa {
 
     @Override
     public String toString() {
-        return "placa=" + placa + ", marca=" + marca + ", modelo=" + modelo + ", km=" + km + ", alugado=" + alugado + ", precoDia=" + precoDia + '}';
+        return "Placa: " + placa + ", Marca: " + marca + ", Modelo: " + modelo + ", Kilometragem: " + km + ", Alugado: " + alugado + ", Preço por dia: " + precoDia + '.';
     }
    
     

@@ -37,7 +37,7 @@ public class Cnh {
 
     @Override
     public String toString() {
-        return "Cnh{" + "registro=" + registro + ", anoExp=" + anoExp + '}';
+        return "Numero de registro da CNH: " + registro + ", Ano de Expedição: " + anoExp + '.';
     }
    
     
