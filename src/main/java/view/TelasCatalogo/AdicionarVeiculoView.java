@@ -9,6 +9,8 @@ import dao.CatalogoDAO;
 import model.Catalogo;
 import model.Van;
 import exceptions.PlacaExistenteException;
+import java.awt.event.ActionListener;
+import java.util.List;
 import javax.swing.JOptionPane;
 import model.Veiculo;
 
@@ -23,7 +25,6 @@ public class AdicionarVeiculoView extends javax.swing.JFrame {
      */
     public AdicionarVeiculoView() {
         initComponents();
-        popularComboBox();
     }
 
     /**
@@ -82,11 +83,6 @@ public class AdicionarVeiculoView extends javax.swing.JFrame {
 
         btnAdd.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnAdd.setText("Adicionar");
-        btnAdd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -172,53 +168,41 @@ public class AdicionarVeiculoView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        Catalogo c = (Catalogo) cbTipo.getSelectedItem();
-        String placa = tfPlaca.getText();
-        String modelo = tfModelo.getText();
-        String marca = tfMarca.getText();
-        boolean alugado = false;
-        float precoDia = Float.parseFloat(tfPreco.getText());
-        int km = Integer.parseInt(tfKmCarro.getText());
-
-        try {
-            Veiculo veiculo = criarVeiculo(c, placa, modelo, marca, precoDia, alugado, km);
-
-            c.addVeiculo(veiculo);
-
-
-
-            JOptionPane.showMessageDialog(null, "Veiculo adicionado com sucesso!");
-
-            if (veiculo.getID() == 1) {
-                c.addVeiculoMap(veiculo);
-            } else {
-                for (Veiculo v : c.getVeiculos()) {
-                    if (v.equals(veiculo)) {
-                        return;
-                    }
-                }
-                
-                c.addVeiculoMap(veiculo);
-            }       
-            
-        } catch (PlacaExistenteException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-        }
-    }//GEN-LAST:event_btnAddActionPerformed
-
-    private Veiculo criarVeiculo(Catalogo c, String placa, String modelo, String marca, float precoDia, boolean alugado, int km) throws PlacaExistenteException {
-        if (c.getTipo().equalsIgnoreCase("carro")) {
-            Veiculo v = new Carro(placa, marca, modelo, km, alugado, precoDia);
-            return v;
-        } else {
-            Veiculo v = new Van(placa, marca, modelo, km, alugado, precoDia);
-            return v;
-        }
+    
+    public void adicionarAcaoBotaoCadastrar(ActionListener acao) {
+        this.btnAdd.addActionListener(acao);
     }
-
-    private void popularComboBox() {
-        for (Catalogo cat : CatalogoDAO.recuperarTodosCatalogos()) {
+    
+    public Catalogo getCatalogo() {
+        return (Catalogo) cbTipo.getSelectedItem();
+    }
+    
+    public String getPlaca() {
+        return tfPlaca.getText();
+    }
+    
+    public String getModelo() {
+        return tfModelo.getText();
+    }
+   
+    public String getMarca() {
+        return tfMarca.getText();
+    }
+    
+    public float getPrecoDia() {
+        return Float.parseFloat(tfPreco.getText());
+    }
+    
+    public int getKm() {
+        return Integer.parseInt(tfKmCarro.getText());
+    }
+    
+    public void exibir() {
+        this.setVisible(true);
+    }
+    
+    public void popularComboBox(List<Catalogo> catalogo) {
+        for(Catalogo cat : catalogo) {
             cbTipo.addItem(cat);
         }
     }

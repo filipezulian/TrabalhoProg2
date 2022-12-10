@@ -4,6 +4,8 @@
  */
 package TelaHome;
 
+import controller.catalogo.AdicionarVeiculoController;
+import controller.catalogo.ApagarVeiculoController;
 import model.Catalogo;
 import view.TelasAluguel.AlugarView;
 import view.TelasAluguel.DevolucaoView;
@@ -224,15 +226,15 @@ public class HomeView extends javax.swing.JFrame {
     }//GEN-LAST:event_miEditarVeiculoActionPerformed
 
     private void miAddVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAddVeiculoActionPerformed
-      AdicionarVeiculoView av = new AdicionarVeiculoView();
-      
-      av.setVisible(true);
+       AdicionarVeiculoController avc = new  AdicionarVeiculoController(new AdicionarVeiculoView());
+       
+       avc.exibirTela();
     }//GEN-LAST:event_miAddVeiculoActionPerformed
 
     private void miApagarVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miApagarVeiculoActionPerformed
-      ApagarVeiculoView apv = new ApagarVeiculoView();
+        ApagarVeiculoController avc = new ApagarVeiculoController(new ApagarVeiculoView());
       
-      apv.setVisible(true);
+      avc.exibirTela();
     }//GEN-LAST:event_miApagarVeiculoActionPerformed
 
     private void miAlugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAlugarActionPerformed

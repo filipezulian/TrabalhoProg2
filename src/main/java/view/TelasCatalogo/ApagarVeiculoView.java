@@ -8,6 +8,8 @@ import model.Carro;
 import model.Catalogo;
 import model.Van;
 import dao.CatalogoDAO;
+import java.awt.event.ActionListener;
+import java.util.List;
 import javax.swing.JOptionPane;
 import model.Multa;
 import model.Veiculo;
@@ -23,7 +25,6 @@ public class ApagarVeiculoView extends javax.swing.JFrame {
      */
     public ApagarVeiculoView() {
         initComponents();
-        popularComboBox();
     }
 
     /**
@@ -56,11 +57,6 @@ public class ApagarVeiculoView extends javax.swing.JFrame {
 
         btnApagarVeiculo.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnApagarVeiculo.setText("Apagar");
-        btnApagarVeiculo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnApagarVeiculoActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -114,28 +110,30 @@ public class ApagarVeiculoView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnApagarVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApagarVeiculoActionPerformed
-        Veiculo veic = (Veiculo) cbApagar.getSelectedItem();
-
-        if (veic == null) {
-            JOptionPane.showMessageDialog(null, "Não ha nada para remover.");
-        } else {
-            for (Catalogo cat : CatalogoDAO.recuperarTodosCatalogos()) {
-                cat.removerVeiculo(veic);
-                JOptionPane.showMessageDialog(null, "Veículo removido com sucesso!");
-
-            }
-        }
+    
+    public void exibir() {
+        this.setVisible(true);
+    }
+    
+    public Veiculo getVeiculo() {
+        return (Veiculo) cbApagar.getSelectedItem();
+    }
+    
+    public void exibirMensagem(String msg) {
+        JOptionPane.showMessageDialog(null, msg);
+    }
+    
+    public void limparcb(){
         cbApagar.removeAllItems();
-        popularComboBox();
-
-    }//GEN-LAST:event_btnApagarVeiculoActionPerformed
-
-    private void popularComboBox() {
-        for (Catalogo cat : CatalogoDAO.recuperarTodosCatalogos()) {
-            for (Veiculo v : cat.getVeiculos()) {
-                cbApagar.addItem(v);
-            }
+    }
+    
+    public void adicionarAcaoBotaoApagar(ActionListener acao) {
+        this.btnApagarVeiculo.addActionListener(acao);
+    }
+    
+    public void popularComboBox(List<Veiculo> veiculo) {
+        for (Veiculo veic : veiculo){
+        cbApagar.addItem(veic);
         }
     }
 
