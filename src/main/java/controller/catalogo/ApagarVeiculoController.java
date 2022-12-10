@@ -2,12 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package cliente.controller;
+package controller.catalogo;
 
 /**
  *
  * @author Filipe Zulian
  */
-public class EditarClienteController {
+public class ApagarVeiculoController {
     
 }
