@@ -44,7 +44,7 @@ public class ApagarVeiculoController {
         this.avv.popularComboBox(veiculos);
     }
 
-    public void adicionarAcaoBotao() {
+  public void adicionarAcaoBotao() {
         avv.adicionarAcaoBotaoApagar(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -63,7 +63,7 @@ public class ApagarVeiculoController {
                 popularComboBox();
             }
 
-        });
+        });  
 
     }
 

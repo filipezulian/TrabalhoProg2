@@ -8,6 +8,8 @@ import model.Carro;
 import model.Catalogo;
 import model.Van;
 import dao.CatalogoDAO;
+import java.awt.event.ActionListener;
+import java.util.List;
 import javax.swing.JOptionPane;
 import model.Multa;
 import model.Veiculo;
@@ -23,7 +25,6 @@ public class EditarVeiculoView extends javax.swing.JFrame {
      */
     public EditarVeiculoView() {
         initComponents();
-        popularComboBox();
     }
 
     /**
@@ -67,11 +68,6 @@ public class EditarVeiculoView extends javax.swing.JFrame {
 
         btnAdd.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnAdd.setText("Adicionar");
-        btnAdd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -141,44 +137,38 @@ public class EditarVeiculoView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        Veiculo v = (Veiculo) cbVeiculos.getSelectedItem();
-
-        float precoDia = v.getPrecoDia();
-        int km = v.getKm();
-        atualizarVeiculo(v, precoDia, km);
-
-        JOptionPane.showMessageDialog(null, "Veículo atualizado com sucesso!");
-
-        cbVeiculos.removeAllItems();
-        popularComboBox();
-
+    public void adicionarAcaoBotaoAdicionar(ActionListener acao) {
+        this.btnAdd.addActionListener(acao);
         limparTela();
-    }//GEN-LAST:event_btnAddActionPerformed
-
-    private void atualizarVeiculo(Veiculo v, float precoDia, int km) {
-            if (!tfPreco.getText().isBlank()) {
-                v.setPrecoDia(Float.parseFloat(tfPreco.getText()));
-            } else {
-                v.setPrecoDia(precoDia);
-            }
-
-            if (!tfKmCarro.getText().isBlank()) {
-                v.setKm(Integer.parseInt(tfKmCarro.getText()));
-            } else {
-                v.setKm(km);
-            }    
+    }
+    
+    public String getPreco(){
+        return tfPreco.getText();
+    }
+    
+    public String getKm(){
+        return tfKmCarro.getText();
+    }
+    
+    public Veiculo getVeiculos (){
+        return (Veiculo) cbVeiculos.getSelectedItem();
+    }
+    
+    public void exibir() {
+        this.setVisible(true);
     }
 
-    private void popularComboBox() {
-        for (Catalogo c : CatalogoDAO.recuperarTodosCatalogos()) {
-            for (Veiculo v : c.getVeiculos()) {
-                cbVeiculos.addItem(v);
-            }
+    public void limparcb(){
+        cbVeiculos.removeAllItems();
+    }
+
+    public void popularComboBox(List<Veiculo> veiculo) {
+        for (Veiculo v : veiculo){
+        cbVeiculos.addItem(v);
         }
     }
 
-    private void limparTela() {
+    public void limparTela() {
         tfPreco.setText("");
         tfKmCarro.setText("");
     }

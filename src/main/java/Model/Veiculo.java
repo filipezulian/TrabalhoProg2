@@ -118,6 +118,7 @@ public abstract class Veiculo implements Multa {
     public String toString() {
         return "Placa: " + placa + ", Marca: " + marca + ", Modelo: " + modelo + ", Kilometragem: " + km + ", Alugado: " + alugado + ", Preço por dia: " + precoDia + '.';
     }
+
    
     
     
